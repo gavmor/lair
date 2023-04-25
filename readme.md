@@ -45,7 +45,7 @@ Perhaps:
 | Category | ASCII Character |
 |---|---|
 | **Academic** |  ✏️ |
-| **School Holidays** |  🏫 |
+| **School Holidays** |  🏫 |p
 | **Public Holidays** |  🏛️ |
 | **Observances** |  🕯️ |
 | **Politics** |  🏛️ |

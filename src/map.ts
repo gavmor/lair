@@ -12,7 +12,6 @@ const createScreen = (title: string) => blessed.screen({
 });
 
 const createMap = (label: string) => contrib.map({
-  // @ts-expect-error
   label,
   startLon: 0,
   startLat: 0,

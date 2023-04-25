@@ -40,7 +40,6 @@ export async function addMarkers(map: any) {
     const time = earthquake.properties.time
     const magnitude = earthquake.properties.mag;
     const color = rgbByMagnitude(magnitude);
-    // charByDepth(depth)
     map.addMarker({ lon: longitude, lat: latitude, color: color, char: charByDepth(depth) });
   }
 }
