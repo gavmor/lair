@@ -9,7 +9,7 @@ This is a cool, retro-looking terminal dashboard that displays the latest earthq
 
 ```bash
 yarn install
-tsx src/map.ts
+yarn start
 ```
 
 The dashboard will automatically update every minute with the latest earthquake data from the USGS API. You can exit the dashboard by pressing `ESC`, `q`, or `Ctrl+C`.

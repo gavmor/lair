@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// Fetch earthquake data from the USGS API
 
 async function fetchEarthquakeData() {
+  // Fetch earthquake data from the USGS API
   const response = await axios.get(
     "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
   );
@@ -17,29 +17,27 @@ function rgbByMagnitude(magnitude: number): [number, number, number] {
   const red = normalizedMagnitude * 255;
   const green = 255 - (normalizedMagnitude * 255);
   const blue = green; // Green light is too strong;
-                      // as green rises, so should blue
-                      // to temper green.
+  // as green rises, so should blue
+  // to temper green.
 
   // Return the color as an array of three numbers.
   return [red, green, blue];
 }
 
-function charByDepth(depth: number, maxDepth: number): string {
-  const normalizedDepth = Math.min(1, depth / maxDepth);
-  return `${' .,-_+*'[normalizedDepth * 5]}`;
-}
+const filterEarthquakes = (earthquake) => earthquake.properties.mag >= 4.5;
+
+const createMarker = (earthquake) => ({
+  lon: earthquake.geometry.coordinates[0],
+  lat: earthquake.geometry.coordinates[1],
+  color: rgbByMagnitude(earthquake.properties.mag),
+  char: "*",
+});
 
 
-
-// Add earthquake markers to the map
-export async function addMarkers(map: any) {
+export async function addMarkers(board: any) {
   const earthquakeData = await fetchEarthquakeData();
-
-  for (const earthquake of earthquakeData) {
-    const [longitude, latitude, depth] = earthquake.geometry.coordinates;
-    const time = earthquake.properties.time
-    const magnitude = earthquake.properties.mag;
-    const color = rgbByMagnitude(magnitude);
-    map.addMarker({ lon: longitude, lat: latitude, color: color, char: charByDepth(depth) });
-  }
+  earthquakeData
+    .filter(filterEarthquakes)
+    .map(createMarker)
+    .forEach(async marker => board.addMarker(marker));
 }
