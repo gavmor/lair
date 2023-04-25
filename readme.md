@@ -23,7 +23,7 @@ Perhaps:
 | Category             | ASCII Character |
 | -------------------- | --------------- |
 | **Academic**         | ✏️               |
-| **School Holidays**  | 🏫               | p |
+| **School Holidays**  | 🏫               |
 | **Public Holidays**  | 🏛️               |
 | **Observances**      | 🕯️               |
 | **Politics**         | 🏛️               |
