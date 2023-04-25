@@ -23,12 +23,13 @@ const createMap = (label: string) => contrib.map({
 const MINUTE_IN_MILLISECONDS = 60 * 1000;
 
 function main() {
-  const screen = createScreen("Where Does \"Title\" This Even Show Up?");
-  const map = createMap("Last Week in Earthquakes");
+  const screen = createScreen("Last Week in Earthquakes"); // Terminal window title
+  const map = createMap("Last Week in Earthquakes"); // Displayed header
   screen.append(map);
 
   async function renderLoop() {
     while (true) {
+      screen.render();
       await addQuakes(map);
       screen.render();
       await new Promise((resolve) => setTimeout(resolve, MINUTE_IN_MILLISECONDS)); // Update every minute
