@@ -20,23 +20,23 @@ You can customize the appearance of the dashboard by modifying the `earthquakes.
 
 ## Event Visualizations
 Perhaps:
-| Category | ASCII Character |
-|---|---|
-| **Academic** |  ✏️ |
-| **School Holidays** |  🏫 |p
-| **Public Holidays** |  🏛️ |
-| **Observances** |  🕯️ |
-| **Politics** |  🏛️ |
-| **Conferences** |  🎓 |
-| **Expos** |  💡 |
-| **Concerts** |  🎤 |
-| **Festivals** |  🎊 |
-| **Performing Arts** |  🎭 |
-| **Sports** |  ⚽️ |
-| **Community** |  👨‍👩‍👦‍👦 |
-| **Daylight Savings** |  ☀️ |
-| **Airport Delays** |  ✈️ |
-| **Severe Weather** |  ⛈️ |
-| **Disasters** |  💥 |
-| **Terror** |  💣 |
-| **Health Warnings** |  🩺 |
+| Category             | ASCII Character |
+| -------------------- | --------------- |
+| **Academic**         | ✏️               |
+| **School Holidays**  | 🏫               | p |
+| **Public Holidays**  | 🏛️               |
+| **Observances**      | 🕯️               |
+| **Politics**         | 🏛️               |
+| **Conferences**      | 🎓               |
+| **Expos**            | 💡               |
+| **Concerts**         | 🎤               |
+| **Festivals**        | 🎊               |
+| **Performing Arts**  | 🎭               |
+| **Sports**           | ⚽️               |
+| **Community**        | 👨‍👩‍👦‍👦               |
+| **Daylight Savings** | ☀️               |
+| **Airport Delays**   | ✈️               |
+| **Severe Weather**   | ⛈️               |
+| **Disasters**        | 💥               |
+| **Terror**           | 💣               |
+| **Health Warnings**  | 🩺               |
