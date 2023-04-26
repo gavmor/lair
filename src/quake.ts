@@ -1,12 +1,17 @@
 import axios from "axios";
 import type { Widgets } from "blessed-contrib";
 import { MapMarker } from "./lib/BlessedContrib";
+import { oneHourAgo } from "./lib/time";
 
+const USGS_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 async function fetchEarthquakeData() {
-  // Fetch earthquake data from the USGS API
-  const response = await axios.get(
-    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+  const response = await axios.get(USGS_URL,
+    {
+      headers: {
+        "If-Modified-Since": oneHourAgo().toUTCString()
+      }
+    }
   );
   return response.data.features;
 }
@@ -32,7 +37,7 @@ const createMarker = (quake): MapMarker => ({
   lon: quake.geometry.coordinates[0],
   lat: quake.geometry.coordinates[1],
   color: rgbByMagnitude(quake.properties.mag),
-  char: "*",
+  char: "~",
 });
 
 

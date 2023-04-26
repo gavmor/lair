@@ -20,7 +20,7 @@ const createMap = (label: string) => contrib.map({
   height: "100%",
 });
 
-const MINUTE_IN_MILLISECONDS = 60 * 1000;
+const ONE_MINUTE = 60 * 1000;
 
 function main() {
   const screen = createScreen("Last Week on Earth"); // Terminal window title
@@ -28,11 +28,10 @@ function main() {
   screen.append(map);
 
   async function renderLoop() {
-    while (true) {
       addEvents(map).then(() => screen.render())
       addQuakes(map).then(() => screen.render())
-      await new Promise((resolve) => setTimeout(resolve, MINUTE_IN_MILLISECONDS)); // Update every minute
-    }
+      await new Promise((resolve) => setTimeout(resolve, ONE_MINUTE * 60));
+    renderLoop()
   }
   
   screen.render();
