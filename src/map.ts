@@ -31,7 +31,8 @@ function main() {
     while (true) {
       screen.render();
       await addEvents(map)
-      // await addQuakes(map);
+      screen.render();
+      await addQuakes(map);
       screen.render();
       await new Promise((resolve) => setTimeout(resolve, MINUTE_IN_MILLISECONDS)); // Update every minute
     }
