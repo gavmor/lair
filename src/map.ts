@@ -29,15 +29,13 @@ function main() {
 
   async function renderLoop() {
     while (true) {
-      screen.render();
-      await addEvents(map)
-      screen.render();
-      await addQuakes(map);
-      screen.render();
+      addEvents(map).then(() => screen.render())
+      addQuakes(map).then(() => screen.render())
       await new Promise((resolve) => setTimeout(resolve, MINUTE_IN_MILLISECONDS)); // Update every minute
     }
   }
-
+  
+  screen.render();
   renderLoop();
 
   // Handle key events
