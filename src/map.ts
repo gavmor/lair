@@ -1,7 +1,7 @@
 import * as blessed from "blessed";
 import * as contrib from "blessed-contrib";
 import { addMarkers as addQuakes } from "./quake";
-import { addMarkers as addEvents } from "./events";
+import { addMarkers as addEvents, getEvents } from "./events";
 
 const ONE_MINUTE = 60 * 1000;
 const GOLDEN = (1 + Math.sqrt(5)) / 2
@@ -30,6 +30,7 @@ async function hydrateLoop(
   screen: blessed.Widgets.Screen
 ) {
   log.log("test")
+  getEvents().then(({data: {results: events}}) => events.forEach(({category}) => log.log(category)))
   addEvents(map, log).then(() => screen.render())
   addQuakes(map).then(() => screen.render()).then(results => results.map(e => log.log(e.category)))
   await new Promise((resolve) => setTimeout(resolve, ONE_MINUTE * 60));
