@@ -1,4 +1,6 @@
 import axios from "axios";
+import type { Widgets } from "blessed-contrib";
+import { MapMarker } from "./lib/BlessedContrib";
 
 
 async function fetchEarthquakeData() {
@@ -24,20 +26,20 @@ function rgbByMagnitude(magnitude: number): [number, number, number] {
   return [red, green, blue];
 }
 
-const filterEarthquakes = (earthquake) => earthquake.properties.mag >= 4.5;
+const significant = (earthquake) => earthquake.properties.mag >= 4.5;
 
-const createMarker = (earthquake) => ({
-  lon: earthquake.geometry.coordinates[0],
-  lat: earthquake.geometry.coordinates[1],
-  color: rgbByMagnitude(earthquake.properties.mag),
+const createMarker = (quake): MapMarker => ({
+  lon: quake.geometry.coordinates[0],
+  lat: quake.geometry.coordinates[1],
+  color: rgbByMagnitude(quake.properties.mag),
   char: "*",
 });
 
 
-export async function addMarkers(board: any) {
+export async function addMarkers(mapElement: Widgets.MapElement) {
   const earthquakeData = await fetchEarthquakeData();
   earthquakeData
-    .filter(filterEarthquakes)
-    .map(createMarker)
-    .forEach(async marker => board.addMarker(marker));
+    .filter(significant)
+    .map(createMarker) // @ts-expect-error
+    .forEach(async marker => mapElement.addMarker(marker));
 }

@@ -1,6 +1,7 @@
 import * as blessed from "blessed";
 import * as contrib from "blessed-contrib";
 import { addMarkers as addQuakes } from "./quake";
+import { addMarkers as addEvents } from "./events";
 
 
 const createScreen = (title: string) => blessed.screen({
@@ -22,14 +23,15 @@ const createMap = (label: string) => contrib.map({
 const MINUTE_IN_MILLISECONDS = 60 * 1000;
 
 function main() {
-  const screen = createScreen("Last Week in Earthquakes"); // Terminal window title
-  const map = createMap("Last Week in Earthquakes"); // Displayed header
+  const screen = createScreen("Last Week on Earth"); // Terminal window title
+  const map = createMap("Last Week on Earth"); // Displayed header
   screen.append(map);
 
   async function renderLoop() {
     while (true) {
       screen.render();
-      await addQuakes(map);
+      await addEvents(map)
+      // await addQuakes(map);
       screen.render();
       await new Promise((resolve) => setTimeout(resolve, MINUTE_IN_MILLISECONDS)); // Update every minute
     }
