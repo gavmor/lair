@@ -1,4 +1,4 @@
-type PredictHQEventSet = {
+export type PredictHQEventSet = {
     count: number
     overflow: boolean
     next: unknown
@@ -6,7 +6,7 @@ type PredictHQEventSet = {
     results: Array<PredictHQEvent>
 }
 
-type PredictHQEvent = {
+export type PredictHQEvent = {
     relevance: number;
     id: string;
     parent_event?: {
