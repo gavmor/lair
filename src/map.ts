@@ -1,7 +1,7 @@
 import * as blessed from "blessed";
 import * as contrib from "blessed-contrib";
 import { addMarkers as addQuakes } from "./quake";
-import { getAndAddMarkers as addEvents, charByCategory, getEvents, markEventsOnMap, putEventsInTable } from "./events";
+import { getEvents, markEventsOnMap, putEventsInTable } from "./events";
 
 // One day?
 const REFRESH_INTERVAL = 24 * 60 * 60 * 1000;
@@ -14,41 +14,6 @@ const createScreen = (title: string) => blessed.screen({
   fullUnicode: true,
 });
 
-async function hydrateLoop(
-  map: contrib.Widgets.MapElement,
-  table: contrib.Widgets.TableElement,
-  log: contrib.Widgets.LogElement,
-  screen: blessed.Widgets.Screen
-) {
-  log.log(`Updated: ${new Date().toUTCString()}`)
-  getEvents()
-    .then(({ data: { results: events } }) => {
-      markEventsOnMap(events, map)
-      putEventsInTable(table, events);
-    })
-    .finally(() => screen.render())
-
-  addQuakes(map).then(() => screen.render()).then(results => results.map(e => log.log(e.category)))
-
-  await new Promise((resolve) => setTimeout(resolve, REFRESH_INTERVAL));
-
-  hydrateLoop(map, table, log, screen)
-}
-
-function main() {
-  const screen = createScreen("Last Week on Earth"); // Terminal window title
-  const grid = new contrib.grid({ rows: 12, cols: 12, screen })
-  const map = grid.set(0, 0, 10, 8, contrib.map, { label: screen.title })
-  const log = grid.set(10, 1, 2, 11, contrib.log, { label: "" })
-  const table = installTable(grid)
-  installGauge(grid, screen);
-
-
-  screen.render();
-  hydrateLoop(map, table, log, screen);
-}
-
-main()
 
 function installTable(grid: contrib.grid) {
   return grid.set(0, 8, 10, 4, contrib.table, {
@@ -80,3 +45,38 @@ function installGauge(grid: contrib.grid, screen: blessed.Widgets.Screen) {
   }, REFRESH_INTERVAL / 100)
 }
 
+
+async function hydrateLoop(
+  map: contrib.Widgets.MapElement,
+  table: contrib.Widgets.TableElement,
+  log: contrib.Widgets.LogElement,
+  screen: blessed.Widgets.Screen
+) {
+  log.log(`Updated: ${new Date().toUTCString()}`)
+  getEvents()
+    .then(({ data: { results: events } }) => {
+      markEventsOnMap(events, map)
+      putEventsInTable(table, events);
+    })
+    .finally(() => screen.render())
+
+  addQuakes(map).then(() => screen.render())
+  await new Promise((resolve) => setTimeout(resolve, REFRESH_INTERVAL));
+
+  hydrateLoop(map, table, log, screen)
+}
+
+function main() {
+  const screen = createScreen("Last Week on Earth"); // Terminal window title
+  const grid = new contrib.grid({ rows: 12, cols: 12, screen })
+  const map = grid.set(0, 0, 10, 8, contrib.map, { label: screen.title })
+  const log = grid.set(10, 1, 2, 11, contrib.log, { label: "" })
+  const table = installTable(grid)
+  installGauge(grid, screen);
+
+
+  screen.render();
+  hydrateLoop(map, table, log, screen);
+}
+
+main()
