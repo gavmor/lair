@@ -17,7 +17,7 @@ export async function getEvents(): Promise<AxiosResponse> {
             params: {
                 category: Object.keys(charByCategory).join(","),
                 rank_level: "5",
-                limit: 30,
+                limit: 64,
                 // "active.gte": new Date().getDate() - 7,
                 // "active.lte": new Date().getDate(),
             }

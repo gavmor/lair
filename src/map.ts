@@ -40,10 +40,8 @@ function main() {
   const grid = new contrib.grid({ rows: 12, cols: 12, screen })
   const map = grid.set(0, 0, 10, 8, contrib.map, { label: screen.title })
   const log = grid.set(10, 1, 2, 11, contrib.log, { label: "" })
-  // const donut = grid.set(10,0,2,1, contrib.donut, {radius: 10, arcwidth: 1, remainColor: "magenta",data: [{percent: 80, label:'', color: 'white'}]})
-  // const log = grid.set(10, 0, 1, 12, contrib.log, { label: "" })
-  const bar = grid.set(10, 0, 2, 12, contrib.gauge, {
-    label: 'Refreshing...',
+    const bar = grid.set(10, 0, 2, 12, contrib.gauge, {
+    label: 'Refresh',
     stroke: 'green',
     fill: 'blue'
   })
@@ -59,7 +57,7 @@ function main() {
     keys: true
     , fg: "white"
     , interactive: false
-    , label: 'Events'
+    , label: ''
     , border: { type: "line" }
     , columnSpacing: 2 //in chars
     , columnWidth: [1, 3, 3, 35] /*in chars*/
