@@ -48,3 +48,4 @@ export async function addMarkers(mapElement: Widgets.MapElement) {
     .map(createMarker) // @ts-expect-error
     .forEach(async marker => mapElement.addMarker(marker));
 }
+

@@ -34,13 +34,6 @@ const createMarker = ({ location, category }: PredictHQEvent): MapMarker => ({
 })
 
 
-export async function getAndAddMarkers(
-    mapElement: Widgets.MapElement,
-    log
-): Promise<Array<PredictHQEvent>> {
-    const { data: {results: events}} = await getEvents();
-    markEventsOnMap(events, mapElement);
-}
 export const charByCategory = {
     // concerts: "&",
     // "performing-arts": "%",
@@ -55,3 +48,16 @@ export function markEventsOnMap(events: Array<PredictHQEvent>, mapElement: Widge
     events.map(createMarker).forEach((marker) => mapElement.addMarker(marker));
 }
 
+export function putEventsInTable(table: contrib.Widgets.TableElement, events: Array<PredictHQEvent>) {
+    table.setData(
+      {
+        headers: ['', 'Day', 'Loc', 'Title'],
+        data: events.map((e: PredictHQEvent) => [
+          charByCategory[e.category],
+          new Date(e.start).toDateString().slice(0, 3),
+          e.country,
+          e.title,
+        ])
+      });
+  }
+  
