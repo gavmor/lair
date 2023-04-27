@@ -16,18 +16,14 @@ async function fetchEarthquakeData() {
   return response.data.features;
 }
 
-function rgbByMagnitude(magnitude: number): [number, number, number] {
-  // Convert the magnitude to a range of 0-1.
+type RGB = [number, number, number];
+
+function rgbByMagnitude(magnitude: number): RGB {
   const normalizedMagnitude = magnitude / 10;
 
-  // Calculate the red, green, and blue components of the color.
   const red = normalizedMagnitude * 255;
   const green = 255 - (normalizedMagnitude * 255);
-  const blue = green; // Green light is too strong;
-  // as green rises, so should blue
-  // to temper green.
-
-  // Return the color as an array of three numbers.
+  const blue = green
   return [red, green, blue];
 }
 

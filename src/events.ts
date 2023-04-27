@@ -48,7 +48,7 @@ export function markEventsOnMap(events: Array<PredictHQEvent>, mapElement: Widge
     events.map(createMarker).forEach((marker) => mapElement.addMarker(marker));
 }
 
-export function putEventsInTable(table: contrib.Widgets.TableElement, events: Array<PredictHQEvent>) {
+export function putEventsInTable(table: Widgets.TableElement, events: Array<PredictHQEvent>) {
     table.setData(
       {
         headers: ['', 'Day', 'Loc', 'Title'],

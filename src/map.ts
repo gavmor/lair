@@ -74,7 +74,6 @@ function main() {
   const table = installTable(grid)
   installGauge(grid, screen);
 
-
   screen.render();
   hydrateLoop(map, table, log, screen);
 }
