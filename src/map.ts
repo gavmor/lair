@@ -3,7 +3,8 @@ import * as contrib from "blessed-contrib";
 import { addMarkers as addQuakes } from "./quake";
 import { getAndAddMarkers as addEvents, charByCategory, getEvents, markEventsOnMap, putEventsInTable } from "./events";
 
-const ONE_MINUTE = 60 * 1000;
+// One day?
+const REFRESH_INTERVAL = 24 * 60 * 60 * 1000;
 
 const createScreen = (title: string) => blessed.screen({
   smartCSR: true,
@@ -29,7 +30,7 @@ async function hydrateLoop(
 
   addQuakes(map).then(() => screen.render()).then(results => results.map(e => log.log(e.category)))
   
-  await new Promise((resolve) => setTimeout(resolve, ONE_MINUTE));
+  await new Promise((resolve) => setTimeout(resolve, REFRESH_INTERVAL));
 
   hydrateLoop(map, table, log, screen)
 }
@@ -38,7 +39,22 @@ function main() {
   const screen = createScreen("Last Week on Earth"); // Terminal window title
   const grid = new contrib.grid({ rows: 12, cols: 12, screen })
   const map = grid.set(0, 0, 10, 8, contrib.map, { label: screen.title })
-  const log = grid.set(10, 0, 2, 12, contrib.log, { label: "Log" })
+  const log = grid.set(10, 1, 2, 11, contrib.log, { label: "" })
+  // const donut = grid.set(10,0,2,1, contrib.donut, {radius: 10, arcwidth: 1, remainColor: "magenta",data: [{percent: 80, label:'', color: 'white'}]})
+  // const log = grid.set(10, 0, 1, 12, contrib.log, { label: "" })
+  const bar = grid.set(10, 0, 2, 12, contrib.gauge, {
+    label: 'Refreshing...',
+    stroke: 'green',
+    fill: 'blue'
+  })
+  
+  let n = 0.00
+  setInterval(()=>{
+    bar.setPercent((n += 0.01) % 1)
+    screen.render();
+  }, REFRESH_INTERVAL/100
+    )
+
   const table = grid.set(0, 8, 10, 4, contrib.table, {
     keys: true
     , fg: "white"
