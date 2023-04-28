@@ -17,26 +17,3 @@ The dashboard will automatically update every minute with the latest earthquake 
 ## Customization
 
 You can customize the appearance of the dashboard by modifying the `earthquakes.ts` script. For example, you can change the colors used for different magnitudes or the character used to represent earthquakes on the map.
-
-## Event Visualizations
-Perhaps:
-| Category             | ASCII Character |
-| -------------------- | --------------- |
-| **Academic**         | ✏️               |
-| **School Holidays**  | 🏫               |
-| **Public Holidays**  | 🏛️               |
-| **Observances**      | 🕯️               |
-| **Politics**         | 🏛️               |
-| **Conferences**      | 🎓               |
-| **Expos**            | 💡               |
-| **Concerts**         | 🎤               |
-| **Festivals**        | 🎊               |
-| **Performing Arts**  | 🎭               |
-| **Sports**           | ⚽️               |
-| **Community**        | 👨‍👩‍👦‍👦               |
-| **Daylight Savings** | ☀️               |
-| **Airport Delays**   | ✈️               |
-| **Severe Weather**   | ⛈️               |
-| **Disasters**        | 💥               |
-| **Terror**           | 💣               |
-| **Health Warnings**  | 🩺               |
