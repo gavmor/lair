@@ -1,19 +1,18 @@
 # Lair
 
-This is a cool, retro-looking terminal dashboard that displays the latest earthquakes on a world map, reminiscent of a Bond villain's lair. The earthquakes are color-coded based on their magnitude. Why is it in TypeScript? No good reason.
+This is a cool, retro-looking terminal dashboard that displays the latest earthquakes on a world map, reminiscent of a Bond villain's lair. The earthquakes are color-coded based on their magnitude.
 
 ![Earthquake Terminal Dashboard](./last-week-in-earthquakes.png)
+
 *This is screenshot was taken in cool-retro-term; batteries not included.*
 
 ## Usage
 
 ```bash
-yarn install
-yarn start
+yarn install; yarn start
 ```
 
-The dashboard will automatically update every minute with the latest earthquake data from the USGS API. You can exit the dashboard by pressing `ESC`, `q`, or `Ctrl+C`.
-
-## Customization
-
-You can customize the appearance of the dashboard by modifying the `earthquakes.ts` script. For example, you can change the colors used for different magnitudes or the character used to represent earthquakes on the map.
+## Dependencies
+Currently, this pulls from:
+- [PredictHQ](https://docs.predicthq.com/resources/events#search-events) (for which you'll need a `$PHQ_TOKEN`) and 
+- [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) (for which you won't).
